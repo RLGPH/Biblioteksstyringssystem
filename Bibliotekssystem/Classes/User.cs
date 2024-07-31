@@ -14,6 +14,12 @@ namespace Bibliotekssystem
         public string UserID { get; set; }
         public List<Book> Books { get; set; }
 
+        public User(string name, string Userid)
+        {
+            Name = name;
+            UserID = Userid;
+        }
+
         public User()
         {
             Books = new List<Book>();
