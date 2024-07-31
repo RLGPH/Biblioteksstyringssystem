@@ -17,28 +17,32 @@ namespace Bibliotekssystem
             Users = new List<User>();
         }
 
-        public void AddBook(Book book)
+        public bool AddBook(Book book)
         {
             Books.Add(book);
             Console.WriteLine($"Added book: {book.Title}");
+            return true;
         }
 
-        public void RemoveBook(Book book)
+        public bool RemoveBook(Book book)
         {
             if (Books.Remove(book))
             {
                 Console.WriteLine($"Removed book: {book.Title}");
+                return true;
             }
             else
             {
                 Console.WriteLine($"Book not found: {book.Title}");
+                return false;
             }
         }
 
-        public void RegisterUser(User user)
+        public bool RegisterUser(User user)
         {
             Users.Add(user);
             Console.WriteLine($"Registered user: {user.Name}");
+            return true;
         }
 
         public void DisplayAllBooks()
@@ -49,6 +53,9 @@ namespace Bibliotekssystem
                 Console.WriteLine($"- {book.Title} by {book.Author} (ISBN: {book.ISBN}) - Available: {book.IsAvailable}");
             }
         }
-
+        public Book FindBookByISBN(string isbn)
+        {
+            return Books.FirstOrDefault(b => b.ISBN == isbn);
+        }
     }
 }

@@ -25,12 +25,12 @@ namespace Bibliotekssystem
             Books = new List<Book>();
         }
 
-        public void BorrowBook(Library library, Book book)
+        public bool BorrowBook(Library library, Book book)
         {
             if (Books.Count >= MaxBooksAllowed)
             {
                 Console.WriteLine($"{Name} has already borrowed the maximum number of {MaxBooksAllowed} books.");
-                return;
+                return false;
             }
 
             if (book.IsAvailable)
@@ -38,33 +38,28 @@ namespace Bibliotekssystem
                 Books.Add(book);
                 book.IsAvailable = false;
                 Console.WriteLine($"{Name} borrowed {book.Title}.");
+                return true;
             }
             else
             {
                 Console.WriteLine($"{book.Title} is not available.");
+                return false;
             }
         }
 
-        public void ReturnBook(Library library, Book book)
+        public bool ReturnBook(Library library, Book book)
         {
             if (Books.Contains(book))
             {
                 Books.Remove(book);
                 book.IsAvailable = true;
                 Console.WriteLine($"{Name} returned {book.Title}.");
+                return true;
             }
             else
             {
                 Console.WriteLine($"{Name} does not have {book.Title} borrowed.");
-            }
-        }
-
-        public void DisplayBorrowedBooks()
-        {
-            Console.WriteLine($"{Name}'s borrowed books:");
-            foreach (var book in Books)
-            {
-                Console.WriteLine($"- {book.Title} by {book.Author} (ISBN: {book.ISBN})");
+                return false;
             }
         }
     }
