@@ -21,9 +21,10 @@ namespace Bibliotekssystem
             IsAvailable = isAvailable;
         }
 
-        public void DisplayInfo()
+        public void DisplayInfo(string ISBN, Library library)
         {
-            Console.WriteLine($"Title: {Title}, Author: {Author}, ISBN: {ISBN}, Available: {IsAvailable}");
+            Book book = library.FindBookByISBN(ISBN);
+            Console.WriteLine($"Info about Title: {book.Title}, Author: {book.Author}, ISBN: {book.ISBN}, Available: {book.IsAvailable}");
         }
         public void IsAvailableFlip(Book book)
         {
