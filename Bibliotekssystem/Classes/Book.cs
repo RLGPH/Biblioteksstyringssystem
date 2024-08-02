@@ -11,7 +11,8 @@ namespace Bibliotekssystem
         public string Title { get; set; } = "N/A";
         public string Author { get; set; } = "N/A";
         public string ISBN { get; set; } = "N/A";
-        public bool IsAvailable { get; private set; } = false;
+        //just changed to true after getting reviewed and i can see why it should be true
+        public bool IsAvailable { get; private set; } = true;
 
         public Book(string title, string author, string iSBN, bool isAvailable)
         {
@@ -20,7 +21,7 @@ namespace Bibliotekssystem
             ISBN = iSBN;
             IsAvailable = isAvailable;
         }
-
+        
         public void DisplayInfo(string ISBN, Library library)
         {
             Book book = library.FindBookByISBN(ISBN);
