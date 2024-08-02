@@ -11,8 +11,11 @@ namespace Bibliotekssystem
         public string Title { get; set; } = "N/A";
         public string Author { get; set; } = "N/A";
         public string ISBN { get; set; } = "N/A";
+        //eventuelt generer et ISBN, så behøver man ikke at skrive det ind manuelt :)
         public bool IsAvailable { get; private set; } = false;
-
+        //Overvej at sætte den til true
+        //kan gøre det lettere når man opretter bøger.
+               
         public Book(string title, string author, string iSBN, bool isAvailable)
         {
             Title = title;

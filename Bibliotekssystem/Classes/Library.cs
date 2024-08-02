@@ -16,16 +16,20 @@ namespace Bibliotekssystem
             Books = new List<Book>();
             Users = new List<User>();
         }
+        //du behøver ikke at bruge en constructor til at oprette en ny liste, kan gøres oppe i field'et.
 
         public bool AddBook(Book book)
         {
             Books.Add(book);
             Console.WriteLine($"Added book: {book.Title}");
             return true;
+            //Bool er ikke nødvendigt, når du altid returnerer true.
+            //Desuden benyttes bool værdien ikke i andre steder i programmet. Valider eventuelt på library værdierne.
         }
 
         public bool RemoveBook(Book book)
         {
+            //samme som ovenstående.
             if (Books.Remove(book))
             {
                 Console.WriteLine($"Removed book: {book.Title}");
@@ -43,6 +47,8 @@ namespace Bibliotekssystem
             Users.Add(user);
             Console.WriteLine($"Registered user: {user.Name}");
             return true;
+            //returnerer altid true, så din unit test vil altid gå igennem
+            //brug evt. void, hvis ikke returværdien bruges.
         }
 
         public void DisplayAllAvailableBooks() 
@@ -68,6 +74,7 @@ namespace Bibliotekssystem
         public Book FindBookByISBN(string isbn)
         {
             return Books.FirstOrDefault(b => b.ISBN == isbn);
+            //Brug evt. first i stedet for firstordefault.
         }
     }
 }

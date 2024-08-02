@@ -19,10 +19,13 @@ namespace Bibliotekssystem
             Name = name;
             UserID = userid;
             Books = new List<Book>();
+            //overvej at flytte oprettelsen til fieldet.
         }
+
 
         public virtual bool BorrowBook(Library library, string isbn)
         {
+            //eventuelt overvej at fjerne bool fra denne, da det kun benyttes i unit test.
             if (Books.Count >= MaxBooksAllowed)
             {
                 Console.WriteLine($"{Name} has already borrowed the maximum number of {MaxBooksAllowed} books.");
@@ -53,6 +56,7 @@ namespace Bibliotekssystem
         public bool ReturnBook(Library library, string isbn)
         {
             Book book = Books.FirstOrDefault(b => b.ISBN == isbn);
+            //brug evt first istedet for firstordefault.
             if (book == null)
             {
                 Console.WriteLine($"{Name} does not have a book with ISBN {isbn} borrowed.");

@@ -9,6 +9,7 @@ namespace Bibliotekssystem
     class Program
     {
         static void Main(string[] args)
+            //unødvendigt at bruge args
         {
             //display test
             Library library = new Library();
@@ -22,12 +23,15 @@ namespace Bibliotekssystem
             Book book4 = new Book("Entity Framework Core", "Bob Johnson", "B2233", true);
             Book book5 = new Book("Blazor WebAssembly", "Carol Brown", "B3344", true);
 
+            //IsAvailable kan eventuelt fjernes som parameter, da bøgerne plejer at være tilgængelige når de oprettes.
+
             library.AddBook(book);
             library.AddBook(book1);
             library.AddBook(book2);
             library.AddBook(book3);
             library.AddBook(book4);
             library.AddBook(book5);
+            //eventuelt lav et loop til at tilføje.
 
             library.RegisterUser(user);
 
@@ -43,3 +47,8 @@ namespace Bibliotekssystem
         }
     }
 }
+//generelt kan jeg foreslå følgende.
+//ikke brug bool hvis det kun benyttes til unit test (med undtagelser)
+//Eventuelt overvej at lave en automatisk opretning af ISBN
+//overvej at sørge for at en bog er available indtil den lånes, så behøves den ekstra parameter ikke.
+

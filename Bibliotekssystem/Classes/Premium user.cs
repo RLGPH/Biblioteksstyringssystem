@@ -13,9 +13,12 @@ namespace Bibliotekssystem
         public PremiumUser(string name, string userid) : base(name, userid)
         {
         }
+        //ikke nødvendigt at have denne constructor (kan bare bruge primary constructor)
 
         public override bool BorrowBook(Library library, string isbn)
         {
+            //Eventuelt ikke bruge bool, da bool kun benyttes i unit test. 
+            //I stedet prøv eventuelt at validere på den enkelte bog eller lignende.
             if (Books.Count >= PremiumMaxBooksAllowed)
             {
                 Console.WriteLine($"{Name} has already borrowed the maximum number of {PremiumMaxBooksAllowed} books.");
