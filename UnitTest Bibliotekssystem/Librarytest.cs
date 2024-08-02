@@ -2,7 +2,7 @@ using Bibliotekssystem;
 
 namespace UnitTest_Bibliotekssystem
 {
-    public class UnitTest1
+    public class LibraryTest
     {
         [Fact]
         public void LibraryAddAndRemove()

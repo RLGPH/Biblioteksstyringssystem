@@ -45,6 +45,18 @@ namespace Bibliotekssystem
             return true;
         }
 
+        public void DisplayAllAvailableBooks() 
+        {
+            Console.WriteLine("All available books in the library:");
+            foreach (Book book in Books)
+            {
+                if (book.IsAvailable)
+                {
+                    Console.WriteLine($"- {book.Title} by {book.Author} (ISBN: {book.ISBN})");
+                }
+            }
+        }
+
         public void DisplayAllBooks()
         {
             Console.WriteLine("All books in the library:");

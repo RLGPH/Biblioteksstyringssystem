@@ -8,10 +8,10 @@ namespace Bibliotekssystem
 {
     public class Book
     {
-        public string Title { get; set; }
-        public string Author { get; set; }
-        public string ISBN { get; set; }
-        public bool IsAvailable { get; set; }
+        public string Title { get; set; } = "N/A";
+        public string Author { get; set; } = "N/A";
+        public string ISBN { get; set; } = "N/A";
+        public bool IsAvailable { get; private set; } = false;
 
         public Book(string title, string author, string iSBN, bool isAvailable)
         {
@@ -24,6 +24,17 @@ namespace Bibliotekssystem
         public void DisplayInfo()
         {
             Console.WriteLine($"Title: {Title}, Author: {Author}, ISBN: {ISBN}, Available: {IsAvailable}");
+        }
+        public void IsAvailableFlip(Book book)
+        {
+            if (IsAvailable)
+            {
+                book.IsAvailable = false; 
+            }
+            else
+            {
+                book.IsAvailable = true;
+            }
         }
     }
 }

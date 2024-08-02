@@ -1,31 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bibliotekssystem
 {
     public class User
     {
-        private const int MaxBooksAllowed = 5;
+        protected const int MaxBooksAllowed = 4;
 
         public string Name { get; set; }
         public string UserID { get; set; }
         public List<Book> Books { get; set; }
 
-        public User(string name, string Userid)
+        public User(string name, string userid)
         {
             Name = name;
-            UserID = Userid;
-        }
-
-        public User()
-        {
+            UserID = userid;
             Books = new List<Book>();
         }
 
-        public bool BorrowBook(Library library, Book book)
+        public virtual bool BorrowBook(Library library, string isbn)
         {
             if (Books.Count >= MaxBooksAllowed)
             {
@@ -33,10 +27,17 @@ namespace Bibliotekssystem
                 return false;
             }
 
+            Book book = library.FindBookByISBN(isbn);
+            if (book == null)
+            {
+                Console.WriteLine($"Book with ISBN {isbn} not found in the library.");
+                return false;
+            }
+
             if (book.IsAvailable)
             {
                 Books.Add(book);
-                book.IsAvailable = false;
+                book.IsAvailableFlip(book);
                 Console.WriteLine($"{Name} borrowed {book.Title}.");
                 return true;
             }
@@ -47,18 +48,26 @@ namespace Bibliotekssystem
             }
         }
 
-        public bool ReturnBook(Library library, Book book)
+        public bool ReturnBook(Library library, string isbn)
         {
-            if (Books.Contains(book))
+            Book book = Books.FirstOrDefault(b => b.ISBN == isbn);
+            if (book == null)
             {
-                Books.Remove(book);
-                book.IsAvailable = true;
+                Console.WriteLine($"{Name} does not have a book with ISBN {isbn} borrowed.");
+                return false;
+            }
+
+            Books.Remove(book);
+            Book libraryBook = library.FindBookByISBN(isbn);
+            if (libraryBook != null)
+            {
+                libraryBook.IsAvailableFlip(libraryBook);
                 Console.WriteLine($"{Name} returned {book.Title}.");
                 return true;
             }
             else
             {
-                Console.WriteLine($"{Name} does not have {book.Title} borrowed.");
+                Console.WriteLine($"Book with ISBN {isbn} not found in the library.");
                 return false;
             }
         }
